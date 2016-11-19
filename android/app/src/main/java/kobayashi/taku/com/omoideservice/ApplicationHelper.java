@@ -219,4 +219,25 @@ public class ApplicationHelper {
 		time += second;
 		return time;
 	}
+
+	public static boolean hasSelfPermission(Context context, String permission) {
+		if(Build.VERSION.SDK_INT < 23) return true;
+		return context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+	}
+
+	public static void requestPermissions(Activity activity, int requestCode){
+		if(Build.VERSION.SDK_INT >= 23) {
+			ArrayList<String> permissions = ApplicationHelper.getSettingPermissions(activity);
+			boolean isRequestPermission = false;
+			for(String permission : permissions){
+				if(!ApplicationHelper.hasSelfPermission(activity, permission)){
+					isRequestPermission = true;
+					break;
+				}
+			}
+			if(isRequestPermission) {
+				activity.requestPermissions(permissions.toArray(new String[0]), requestCode);
+			}
+		}
+	}
 }
