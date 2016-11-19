@@ -1,6 +1,8 @@
 package kobayashi.taku.com.omoideservice;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.NfcAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +17,10 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -42,7 +48,10 @@ public class MainActivity extends AppCompatActivity {
         // Other app specific specialization
         if(isLoggedIn()){
             loginButton.setVisibility(View.INVISIBLE);
-            sendToToken(AccessToken.getCurrentAccessToken().getToken());
+            SharedPreferences sp = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+            if(!sp.contains("user_token")){
+                sendToToken(AccessToken.getCurrentAccessToken().getToken());
+            }
         }else {
             callbackManager = CallbackManager.Factory.create();
             // Callback registration
@@ -79,6 +88,15 @@ public class MainActivity extends AppCompatActivity {
         apiRequest.addCallback(new ApiRequest.ResponseCallback() {
             @Override
             public void onSuccess(String url, String body) {
+                SharedPreferences sp = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sp.edit();
+                try {
+                    JSONObject jObject = new JSONObject(body);
+                    editor.putString("user_token", jObject.getString("user_token"));
+                    editor.apply();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Log.d(Config.TAG, "url:" + url + " body:" + body );
             }
         });
