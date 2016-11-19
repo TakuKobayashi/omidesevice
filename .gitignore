@@ -44,3 +44,5 @@ captures/
 
 *.DS_Store
 *~
+
+android/app/src/main/res/raw/
