@@ -41,4 +41,17 @@
         </activity>
     </application>
 
+    <service
+        android:name="org.kotemaru.android.gcm_sample2.lib.TokenRefreshService">
+        <intent-filter>
+            <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+        </intent-filter>
+    </service>
+
+    <service
+        android:name="org.kotemaru.android.gcm_sample2.lib.GCMReceiverService">
+        <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter>
+    </service>
 </manifest>

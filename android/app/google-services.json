@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "590049035945",
+    "firebase_url": "https://omoideservice.firebaseio.com",
+    "project_id": "omoideservice",
+    "storage_bucket": "omoideservice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590049035945:android:e5b71e8a91c1b74f",
+        "android_client_info": {
+          "package_name": "kobayashi.taku.com.omoideservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590049035945-4k4ltnbc39lk598dra6l85cm06c908dg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "kobayashi.taku.com.omoideservice",
+            "certificate_hash": "899375148220379676E4EEE82BA49B48DB1CE142"
+          }
+        },
+        {
+          "client_id": "590049035945-6fd3m0i0hq6gpq6blvkahj5j43nonb5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBqP-r1-26buHjVRggQUzqrFdgshUt0rxs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590049035945-6fd3m0i0hq6gpq6blvkahj5j43nonb5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

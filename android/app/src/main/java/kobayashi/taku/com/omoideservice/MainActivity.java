@@ -70,8 +70,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sendToToken(String facebookAccessToken){
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         HashMap<String, Object> params = new HashMap<String, Object>();
         params.put("facebook_access_token", facebookAccessToken);
+        params.put("push_token", refreshedToken);
         params.put("nfc_tag_id", "aaa");
         ApiRequest apiRequest = new ApiRequest();
         apiRequest.addCallback(new ApiRequest.ResponseCallback() {
