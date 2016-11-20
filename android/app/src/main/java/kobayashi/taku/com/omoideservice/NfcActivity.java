@@ -54,8 +54,6 @@ public class NfcActivity extends Activity {
             infoList.add("nfcId:" + tagId.toString());
 
             // カードID取得。Activityはカード認識時起動に設定しているのでここで取れる。
-
-
             for(String t : tag.getTechList()){
                 Log.d(Config.TAG, "t: " + tagId.toString());
             }
@@ -71,15 +69,6 @@ public class NfcActivity extends Activity {
                 }
             }
         }, 2000);
-
-        MediaPlayer se = MediaPlayer.create(this, R.raw.pay);
-        se.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                mp.release();
-            }
-        });
-        se.start();
     }
 
     private void checkIncheckOut(){
@@ -91,9 +80,41 @@ public class NfcActivity extends Activity {
             editor.putLong("checkOutTime", System.currentTimeMillis());
             editor.putInt("stay_counter", sp.getInt("stay_counter", 0) + 1);
             editor.remove("checkInTime");
+            MediaPlayer voice = MediaPlayer.create(this, R.raw.nozomi_emo_checkout1);
+            voice.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    MediaPlayer hebana = MediaPlayer.create(NfcActivity.this, R.raw.nozomi_emo_hebana);
+                    hebana.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            mediaPlayer.release();
+                        }
+                    });
+                    hebana.start();
+                    mp.release();
+                }
+            });
+            voice.start();
             Log.d(Config.TAG, "checkOut");
         }else{
             imageView.setImageResource(R.mipmap.checkin);
+            MediaPlayer.OnCompletionListener listener = new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    mp.release();
+                }
+            };
+            if(sp.getInt("stay_counter", 0) > 0){
+                MediaPlayer voice = MediaPlayer.create(this, R.raw.nozomi_emo_checkin1);
+                voice.setOnCompletionListener(listener);
+                voice.start();
+            }else{
+                MediaPlayer voice = MediaPlayer.create(this, R.raw.checkin2);
+                voice.setOnCompletionListener(listener);
+                voice.start();
+            }
+
             editor.putLong("checkInTime", System.currentTimeMillis());
             Log.d(Config.TAG, "checkIn");
         }
