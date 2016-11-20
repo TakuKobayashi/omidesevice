@@ -34,7 +34,7 @@
         android:layout_marginTop="6dp"
         android:paddingLeft="2dp"
         android:paddingRight="2dp"
-        android:text="@string/login_description"
+        android:text="@string/no_reservation_message"
         android:textColor="#FF000000"
         android:textSize="20sp"
         />

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -38,6 +39,7 @@ public class NfcActivity extends Activity {
         String action = intent.getAction();
         infoList.add("intentAction:" + action);
         Log.d(Config.TAG, "----------------------------------");
+
         if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
             Tag tag = (Tag) intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
 
@@ -57,6 +59,7 @@ public class NfcActivity extends Activity {
             for(String t : tag.getTechList()){
                 Log.d(Config.TAG, "t: " + tagId.toString());
             }
+            checkIncheckOut();
         }
 
         Handler handler = new Handler();
@@ -77,6 +80,24 @@ public class NfcActivity extends Activity {
             }
         });
         se.start();
+    }
+
+    private void checkIncheckOut(){
+        ImageView imageView = (ImageView) findViewById(R.id.ncf_image);
+        SharedPreferences sp = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        if(sp.contains("checkInTime")){
+            imageView.setImageResource(R.mipmap.checkout);
+            editor.putLong("checkOutTime", System.currentTimeMillis());
+            editor.putInt("stay_counter", sp.getInt("stay_counter", 0) + 1);
+            editor.remove("checkInTime");
+            Log.d(Config.TAG, "checkOut");
+        }else{
+            imageView.setImageResource(R.mipmap.checkin);
+            editor.putLong("checkInTime", System.currentTimeMillis());
+            Log.d(Config.TAG, "checkIn");
+        }
+        editor.apply();
     }
 
     @Override

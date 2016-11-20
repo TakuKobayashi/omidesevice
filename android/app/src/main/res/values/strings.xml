@@ -7,4 +7,15 @@
     <string name="top_description_text">アカウントを登録すると、星野リゾートホテルにご宿泊される皆さまにより快適に楽しく過ごせるサービスをお過ごしいただけるサービスをお届けします。</string>
     <string name="account_button_text">アカウントを登録する</string>
     <string name="login_button_text">ログインする</string>
+
+    <string name="menu_top_text">現在のご利用状況</string>
+    <string name="no_reservation_message">ご予約はありません</string>
+    <string name="menu_first_greet_message">ご利用いただきありがとうございます</string>
+    <string name="menu_greet_message">いつもご利用いただきありがとうございます。</string>
+    <string name="menu_announce_message">［おしらせ］</string>
+    <string name="menu_prefix_done">前回のご利用:</string>
+    <string name="menu_show_album_text">ご利用時のアルバムを見る</string>
+    <string name="now_status_button">現在のご利用状況</string>
+    <string name="reservation_button">ご予約</string>
+    <string name="history_button">ご利用履歴</string>
 </resources>

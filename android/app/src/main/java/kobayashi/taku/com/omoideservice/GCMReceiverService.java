@@ -11,6 +11,7 @@ public class GCMReceiverService extends FirebaseMessagingService {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		Log.d(Config.TAG, "------------------------------------------create");
 	}
 
 	// fot FCM
@@ -27,10 +28,12 @@ public class GCMReceiverService extends FirebaseMessagingService {
 
 	@Override
 	public void onDeletedMessages() {
+		Log.d(Config.TAG, "------------------------------------------delete");
 	}
 
 	@Override
 	public void onMessageSent(String msgId) {
+		Log.d(Config.TAG, "------------------------------------------sent");
 	}
 
 }

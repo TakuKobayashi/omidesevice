@@ -43,6 +43,14 @@
 
         <activity
             android:screenOrientation="portrait"
+            android:name=".MenuActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:screenOrientation="portrait"
             android:name=".PremiumContentActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
