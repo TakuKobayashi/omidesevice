@@ -38,76 +38,10 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, PremiumContentActivity.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email", "public_profile");
-
-        // Other app specific specialization
-        if(isLoggedIn()){
-            loginButton.setVisibility(View.INVISIBLE);
-            SharedPreferences sp = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-            if(!sp.contains("user_token")){
-                sendToToken(AccessToken.getCurrentAccessToken().getToken());
-            }
-        }else {
-            callbackManager = CallbackManager.Factory.create();
-            // Callback registration
-            loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-                @Override
-                public void onSuccess(LoginResult loginResult) {
-                    // App code
-                    Log.d(Config.TAG, "success: " + loginResult.getAccessToken());
-                    sendToToken(loginResult.getAccessToken().getToken());
-                }
-
-                @Override
-                public void onCancel() {
-                    // App code
-                    Log.d(Config.TAG, "cancel");
-                }
-
-                @Override
-                public void onError(FacebookException exception) {
-                    // App code
-                    Log.d(Config.TAG, "error:" + exception.getMessage());
-                }
-            });
-        }
-    }
-
-    private void sendToToken(String facebookAccessToken){
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        HashMap<String, Object> params = new HashMap<String, Object>();
-        params.put("facebook_access_token", facebookAccessToken);
-        params.put("push_token", refreshedToken);
-        params.put("nfc_tag_id", "aaa");
-        ApiRequest apiRequest = new ApiRequest();
-        apiRequest.addCallback(new ApiRequest.ResponseCallback() {
-            @Override
-            public void onSuccess(String url, String body) {
-                SharedPreferences sp = getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sp.edit();
-                try {
-                    JSONObject jObject = new JSONObject(body);
-                    editor.putString("user_token", jObject.getString("user_token"));
-                    editor.apply();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                Log.d(Config.TAG, "url:" + url + " body:" + body );
-            }
-        });
-        apiRequest.setParams(params);
-        apiRequest.execute(Config.ROOT_URL + "/account/sign_in");
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
     private boolean isLoggedIn() {
