@@ -111,4 +111,10 @@ public class LoginActivity extends AppCompatActivity {
         Log.d(Config.TAG, "accessToken:" + accessToken );
         return accessToken != null;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ApplicationHelper.releaseImageView((ImageView) findViewById(R.id.login_banner));
+    }
 }

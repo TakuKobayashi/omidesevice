@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -34,14 +35,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ApplicationHelper.requestPermissions(this, REQUEST_CODE);
 
-        Button button = (Button) findViewById(R.id.gotoPremiumContentView);
-        button.setOnClickListener(new View.OnClickListener() {
+        ImageView image = (ImageView) findViewById(R.id.top_image);
+        image.setImageResource(R.mipmap.img_top_title);
+
+        Button rbutton = (Button) findViewById(R.id.register_account);
+        rbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
+        Button lbutton = (Button) findViewById(R.id.login_page_button);
+        lbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ApplicationHelper.releaseImageView((ImageView) findViewById(R.id.top_image));
     }
 
     private boolean isLoggedIn() {

@@ -5,9 +5,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/top_image"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/top_announce"
+        android:layout_below="@+id/top_image"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:text="@string/top_message_text"
+        android:textColor="#FFEEEE00"
+        android:background="#FF000000"
+        android:textSize="24sp"
+        />
+
+    <TextView
+        android:id="@+id/top_description"
+        android:layout_below="@+id/top_announce"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:text="@string/top_description_text"
+        android:textColor="#FF000000"
+        android:textSize="18sp"
+        />
+
     <Button
-        android:id="@+id/gotoPremiumContentView"
+        android:id="@+id/register_account"
+        android:layout_below="@+id/top_description"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/btn_registration1"
+        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PremiumContentView" />
+        android:text="@string/account_button_text"/>
+
+    <Button
+        android:id="@+id/login_page_button"
+        android:layout_below="@+id/register_account"
+        android:layout_centerHorizontal="true"
+        android:background="@mipmap/btn_next1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_button_text"/>
 </RelativeLayout>

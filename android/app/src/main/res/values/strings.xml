@@ -3,4 +3,8 @@
     <string name="facebook_app_id">558477751022272</string>
     <string name="login_title_text">ログイン</string>
     <string name="login_description">Facebookアカウントまたは\n思い出づくりサービスのアカウント\nからログインしてください</string>
+    <string name="top_message_text">思い出づくりサービスアプリへようこそ</string>
+    <string name="top_description_text">アカウントを登録すると、星野リゾートホテルにご宿泊される皆さまにより快適に楽しく過ごせるサービスをお過ごしいただけるサービスをお届けします。</string>
+    <string name="account_button_text">アカウントを登録する</string>
+    <string name="login_button_text">ログインする</string>
 </resources>
